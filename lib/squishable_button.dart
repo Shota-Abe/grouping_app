@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class Bouncing extends StatefulWidget {
+class SquishableButton extends StatefulWidget {
   final Widget child;
   final VoidCallback onPress;
 
-  Bouncing({required this.child, required this.onPress})
+  SquishableButton({required this.child, required this.onPress})
       : assert(child != null);
 
   @override
-  _BouncingState createState() => _BouncingState();
+  _SquishableButtonState createState() => _SquishableButtonState();
 }
 
-class _BouncingState extends State<Bouncing>
+class _SquishableButtonState extends State<SquishableButton>
     with SingleTickerProviderStateMixin {
   late double _scale;
   late AnimationController _controller;

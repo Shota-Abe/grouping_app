@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluentui_icons/fluentui_icons.dart';
-import 'bouncing.dart';
+import 'squishable_button.dart';
 import 'next_page.dart';
 import 'view_model.dart';
 
@@ -75,15 +75,13 @@ class MyHomePage extends ConsumerWidget {
                               onPressed: () {
                                 _viewModel.decrementPlaceCapacity(index);
                               },
-                              child: const Icon(
-                                  Icons.remove_circle_outline)),
+                              child: const Icon(Icons.remove_circle_outline)),
                           Text(_viewModel.places[index].capacity.toString()),
                           CupertinoButton(
                               onPressed: () {
                                 _viewModel.incrementPlaceCapacity(index);
                               },
-                              child: const Icon(
-                                Icons .add_circle_outline)),
+                              child: const Icon(Icons.add_circle_outline)),
                           CupertinoButton(
                               onPressed: () {
                                 _viewModel.removePlace(index);
@@ -103,7 +101,7 @@ class MyHomePage extends ConsumerWidget {
             ),
           ],
         ),
-        floatingActionButton: Bouncing(
+        floatingActionButton: SquishableButton(
           onPress: () {
             _viewModel.set();
           },

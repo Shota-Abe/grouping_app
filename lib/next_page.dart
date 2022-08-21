@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter_dictionary/view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'bouncing.dart';
+import 'squishable_button.dart';
 
 class NextPage extends ConsumerWidget {
   @override
@@ -52,7 +52,7 @@ class NextPage extends ConsumerWidget {
             ),
           ],
         ),
-        floatingActionButton: Bouncing(
+        floatingActionButton: SquishableButton(
           onPress: _viewModel.addMember,
           child: Stack(
             alignment: Alignment.center,
