@@ -58,7 +58,7 @@ class MyHomePage extends ConsumerWidget {
                   return Column(children: <Widget>[
                     ListTile(
                       title: Text(viewModel.places[index].name),
-                      subtitle: Helpers().membersText(viewModel.places[index].members),
+                      subtitle: Helpers.membersText(viewModel.places[index].members),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
