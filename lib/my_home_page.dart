@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_dictionary/helpers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluentui_icons/fluentui_icons.dart';
 import 'squishable_button.dart';
@@ -7,24 +8,15 @@ import 'next_page.dart';
 import 'view_model.dart';
 
 class MyHomePage extends ConsumerWidget {
-  Text membersText(List<String> members) {
-    String membersString = "";
-    for (String member in members) {
-      membersString += ("$member, ");
-    }
-    return Text(
-      membersString,
-      style: TextStyle(color: Colors.black),
-    );
-  }
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _viewModel = ref.watch(viewModelProvider);
+    final viewModel = ref.watch(viewModelProvider);
 
     return Scaffold(
         appBar: AppBar(
-          title: Text("班分け"),
+          title: const Text("班分け"),
           toolbarHeight: 44,
           actions: <Widget>[
             CupertinoButton(
@@ -34,8 +26,8 @@ class MyHomePage extends ConsumerWidget {
                   MaterialPageRoute(builder: (context) => NextPage()),
                 );
               },
-              child: Icon(Icons.people),
-              padding: EdgeInsets.fromLTRB(0, 4, 12, 0),
+              padding: const EdgeInsets.fromLTRB(0, 4, 12, 0),
+              child: const Icon(Icons.people),
             ),
             // ),
           ],
@@ -45,12 +37,12 @@ class MyHomePage extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
-                controller: _viewModel.newPlaceNameController,
-                onChanged: (value) => _viewModel.newPlaceName = value,
+                controller: viewModel.newPlaceNameController,
+                onChanged: (value) => viewModel.newPlaceName = value,
                 decoration: InputDecoration(
                   suffixIcon: CupertinoButton(
-                    onPressed: _viewModel.addPlace,
-                    child: Icon(
+                    onPressed: viewModel.addPlace,
+                    child: const Icon(
                       FluentSystemIcons.ic_fluent_add_filled,
                     ),
                   ),
@@ -61,30 +53,29 @@ class MyHomePage extends ConsumerWidget {
               child: ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                itemCount: _viewModel.places.length,
+                itemCount: viewModel.places.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Column(children: <Widget>[
                     ListTile(
-                      title: Text(_viewModel.places[index].name),
-                      //indexは0から始まり、繰り返される度に+1される変数
-                      subtitle: membersText(_viewModel.places[index].members),
+                      title: Text(viewModel.places[index].name),
+                      subtitle: Helpers().membersText(viewModel.places[index].members),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           CupertinoButton(
                               onPressed: () {
-                                _viewModel.decrementPlaceCapacity(index);
+                                viewModel.decrementPlaceCapacity(index);
                               },
                               child: const Icon(Icons.remove_circle_outline)),
-                          Text(_viewModel.places[index].capacity.toString()),
+                          Text(viewModel.places[index].capacity.toString()),
                           CupertinoButton(
                               onPressed: () {
-                                _viewModel.incrementPlaceCapacity(index);
+                                viewModel.incrementPlaceCapacity(index);
                               },
                               child: const Icon(Icons.add_circle_outline)),
                           CupertinoButton(
                               onPressed: () {
-                                _viewModel.removePlace(index);
+                                viewModel.removePlace(index);
                               },
                               child: const Icon(
                                   FluentSystemIcons.ic_fluent_delete_filled)),
@@ -103,13 +94,13 @@ class MyHomePage extends ConsumerWidget {
         ),
         floatingActionButton: SquishableButton(
           onPress: () {
-            _viewModel.set();
+            viewModel.set();
           },
           child: Stack(
             alignment: Alignment.center,
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(16)), // 調節
+                borderRadius: const BorderRadius.all(Radius.circular(16)), // 調節
                 child:
                     Container(width: 60, height: 60, color: Colors.cyan[100]),
               ),
