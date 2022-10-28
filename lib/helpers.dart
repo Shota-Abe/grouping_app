@@ -6,9 +6,6 @@ class Helpers {
     for (String member in members) {
       membersString += ("$member, ");
     }
-    return Text(
-      membersString,
-      style: TextStyle(color: Colors.black),
-    );
+    return Text(membersString);
   }
 }
